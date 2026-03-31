@@ -10,15 +10,27 @@ const issueSchema = new mongoose.Schema(
     type: String,
     required: true
   },
+  aiDetection: {
+   label: String,
+   confidence: Number
+  },
   imageUrl: {
     type: String
   },
   location: {
-    lat: Number,
-    lng: Number
+   type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+      required: true
+    }
   },
   status: {
     type: String,
+    enum: ["reported", "in_progress", "resolved"],
     default: "reported"
   },
   reportedBy: {
